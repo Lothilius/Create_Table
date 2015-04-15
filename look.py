@@ -2,23 +2,24 @@ __author__ = 'Lothilius'
 
 import csv
 import re
+import numpy as np
 
 
 
 # Pull top two rows from CSV file
 def array_from_file(filename):
     """Given an external file containing data,
-            create an array from the top two rows.
+            create an array from the data.
             The assumption is the top row contains column
-            titles and the second row contains the
-            first row of data."""
-    dataArray = []
+            titles."""
+    data_array = []
     with open(filename, 'rU') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        # for row in spamreader:
-        dataArray.append(spamreader.next())
-        dataArray.append(spamreader.next())
-    return dataArray
+        for row in spamreader:
+            data_array.append(spamreader.next())
+
+    data_array = np.array(data_array)
+    return data_array
 
 # Clean up the Data so that the column names are mysql friendly.
 def clean_name(the_name):
@@ -30,8 +31,6 @@ def clean_name(the_name):
     the_name = regex.sub('', the_name)
 
     return the_name
-
-
 
 # Analyze data row for type
 def create_type_array(array, file_name):

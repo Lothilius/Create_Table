@@ -13,8 +13,6 @@ from sqlalchemy.orm.exc import MultipleResultsFound
 from os import system
 from authentication import mysql_engine_test
 
-# system('mysql -u root -p 123!asdA')
-
 
 
 Base = declarative_base()
