@@ -42,16 +42,13 @@ def max_length(column):
 # Analyze data row for type
 def create_type_array(array, file_name):
     type_list = ['CREATE TABLE ' + clean_name(file_name).capitalize() + '( key_id INT NOT NULL AUTO_INCREMENT, ']
-    for i, each in enumerate(array[1]):
-        length = len(each)
-        if len(each) == 0:
-            length = 255
-        else:
-            length = int(length*1.5)
 
-        if each.isdigit():
+    for i in range(0, len(array[0])):
+        length, item = max_length(array[1::, i])
+
+        if item.isdigit():
             type_list.append(clean_name(array[0][i]) + ' INT DEFAULT NULL, ')
-        elif each.find('-') == 4 and each.find(':') == 13 and length == 24:
+        elif item.find('-') == 4 and item.find(':') == 13 and length == 24:
             type_list.append(clean_name(array[0][i]) + ' DATE DEFAULT NULL, ')
         else:
             type_list.append(clean_name(array[0][i]) + ' VARCHAR(' + str(length) + ') DEFAULT NULL, ')
