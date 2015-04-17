@@ -16,7 +16,7 @@ def array_from_file(filename):
     with open(filename, 'rU') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
         for row in spamreader:
-            data_array.append(spamreader.next())
+            data_array.append(row)
 
     data_array = np.array(data_array)
     return data_array
