@@ -32,6 +32,13 @@ def clean_name(the_name):
 
     return the_name
 
+# Get Max Length for values in a column
+def max_length(column):
+    the_max_length = len(max(column, key=len))
+    item = max(column, key=len)
+    return the_max_length, item
+
+
 # Analyze data row for type
 def create_type_array(array, file_name):
     type_list = ['CREATE TABLE ' + clean_name(file_name).capitalize() + '( key_id INT NOT NULL AUTO_INCREMENT, ']
